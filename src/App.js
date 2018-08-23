@@ -4,13 +4,13 @@ import './App.css';
 
 
 class Todo {
-    id = Math.random();
-    @observable title = "";
-    @observable finished = false;
+  id = Math.random();
+  @observable title = "";
+  @observable finished = false;
 }
 
 class App extends Component {
-  componentDidMount(){
+  componentDidMount() {
 
   }
   render() {
