@@ -1,4 +1,4 @@
-import { observable, action, autorun } from 'mobx';
+import { observable, action, autorun, computed } from 'mobx';
 import { post } from '../fetch/http';
 class fetchStore {
     @observable authenticated;
@@ -7,6 +7,10 @@ class fetchStore {
     @observable item;
 
     @observable testval;
+
+    @computed get userName(){
+        return this.item.loginName;
+    }
 
     // 初始化 state
     constructor() {
@@ -34,13 +38,16 @@ class fetchStore {
 }
 
 const fetchS = new fetchStore();
-fetchS.fetchData('/biGraph/login/dologin.gm', {
-    userName: 'xingmengmeng',
-    userPwd: '12345678',
-    isRemember: false,
-    isCookerLogin: false
-});
+setTimeout(()=>{
+    fetchS.fetchData('/biGraph/login/dologin.gm', {
+        userName: 'xingmengmeng',
+        userPwd: 'xingmengmeng0212',
+        isRemember: true,
+        isCookerLogin: false
+    });
+},1000)
+//观察改变的过程  一开始就会执行一次
 autorun(() => {
-    console.log(fetchS.item);
+    console.log(fetchS.item.loginName);
 })
 export default fetchS;

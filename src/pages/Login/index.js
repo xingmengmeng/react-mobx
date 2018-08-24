@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import './index.less';
 
-@inject('clickTime')
+@inject('clickTime','fetchS')
 @observer
 class Login extends Component {
     render() {
@@ -12,6 +12,9 @@ class Login extends Component {
                 <span onClick={this.props.clickTime.click.bind(this, 2)}>
                     点击+2后的值为：{this.props.clickTime.times}
                 </span>
+                <div>
+                    登录后的用户名为：{this.props.fetchS.userName}
+                </div>
             </div>
         )
     }
