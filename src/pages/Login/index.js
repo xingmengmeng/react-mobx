@@ -4,10 +4,11 @@ import './index.less';
 
 @inject('clickTime')
 @observer
-class Home extends Component {
+class Login extends Component {
     render() {
         return (
-            <div className="homeWrap">
+            <div className="login">
+                <h5>登录</h5>
                 <span onClick={this.props.clickTime.click.bind(this, 2)}>
                     点击+2后的值为：{this.props.clickTime.times}
                 </span>
@@ -15,4 +16,4 @@ class Home extends Component {
         )
     }
 }
-export default Home;
+export default Login;
