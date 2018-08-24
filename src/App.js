@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
-import { observable } from "mobx";
+import RouterMap from './router';
+/**
+ * 可观察的状态 observable  state   
+ * 计算值 computed values
+ * 反应  reactions
+ */
+import { Provider } from 'mobx-react';
+import stores from './stores';
 import './App.css';
 
 
-class Todo {
-  id = Math.random();
-  @observable title = "";
-  @observable finished = false;
-}
-
 class App extends Component {
-  componentDidMount() {
-
-  }
   render() {
     return (
-      <div className="App">
-        hello!
-      </div>
+      <Provider {...stores}>
+        <RouterMap></RouterMap>
+      </Provider>
     );
   }
 }
