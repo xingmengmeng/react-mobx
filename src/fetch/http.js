@@ -1,3 +1,6 @@
+/**
+ * fetch返回的就是一个Promise对象
+ */
 import qs from 'qs';
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {

@@ -1,5 +1,5 @@
 import { observable, action, autorun, computed } from 'mobx';
-import { post } from '../fetch/http';
+import { getLogin } from '../fetch/api';
 class fetchStore {
     @observable authenticated;
     @observable authenticating;
@@ -8,8 +8,8 @@ class fetchStore {
 
     @observable testval;
 
-    @computed get userName(){
-        return this.item.loginName;
+    @computed get userName() {
+        return this.item && this.item.loginName;
     }
 
     // 初始化 state
@@ -22,9 +22,8 @@ class fetchStore {
         this.testval = "Hello";
     }
 
-    @action async fetchData(pathname, param) {
-        const fetchURL = pathname;
-        let { data } = await post(fetchURL, param);
+    @action async fetchData(param) {
+        let { data } = await getLogin(param);
         data && data.length > 0 ? this.setData(data) : this.setSingle(data);
     }
 
@@ -38,14 +37,14 @@ class fetchStore {
 }
 
 const fetchS = new fetchStore();
-setTimeout(()=>{
-    fetchS.fetchData('/biGraph/login/dologin.gm', {
+setTimeout(() => {
+    fetchS.fetchData({
         userName: 'xingmengmeng',
         userPwd: 'xingmengmeng0212',
         isRemember: true,
         isCookerLogin: false
     });
-},1000)
+}, 1000)
 //观察改变的过程  一开始就会执行一次
 autorun(() => {
     console.log(fetchS.item.loginName);
